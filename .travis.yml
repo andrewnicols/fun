@@ -1,1 +1,3 @@
-script: cat `which travis_retry`
+script:
+  - which travis_retry
+  - cat `which travis_retry`
