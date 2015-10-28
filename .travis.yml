@@ -1,3 +1,2 @@
 sudo: false
-script:
-  - ~/.phpenv/bin/phpenv versions
+before_script: phpenv versions
