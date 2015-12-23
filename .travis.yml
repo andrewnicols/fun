@@ -6,12 +6,7 @@ php:
 before_script:
   - phpenv versions
   - php -i
-  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-# - >
-#   sed -i \
-#       -e "s%http://example.com/moodle%http://localhost%" \
-#       -e "s%/home/example/moodledata%/home/travis/roots/base%" \
-#       ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ;
-# - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - rm /home/travis/.phpenv/versions/7.0.0/etc/conf.d/xdebug.ini
+  - php -i
 script:
   - php -v
