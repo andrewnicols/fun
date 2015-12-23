@@ -6,7 +6,7 @@ php:
 before_script:
   - phpenv versions
   - php -i
-  - rm /home/travis/.phpenv/versions/7.0.0/etc/conf.d/xdebug.ini
+  - rm /home/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
   - php -i
 script:
   - php -v
