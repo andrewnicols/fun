@@ -10,3 +10,5 @@ before_script:
   - php -i
 script:
   - php -v
+  - dirname `which php`
+  - phpdbg -rr
