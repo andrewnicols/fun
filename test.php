@@ -18,4 +18,4 @@ function testme($text) {
 }
 
 $text = '<a href="https://www.youtube.com/watch?v=JeimE8Wz6e4">Hey, that\'s pretty good!</a>';
-testme($text);
+var_dump(testme($text));
