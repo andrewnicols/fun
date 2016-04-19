@@ -12,6 +12,8 @@ function testme($text) {
     }, iterator_to_array($domdoc->getElementsByTagName('a')));
     $text = trim($domdoc->saveHTML());
 
+    var_dump($domdoc->getElementsByTagName('a'));
+
     return $domdoc;
 }
 
