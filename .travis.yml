@@ -7,5 +7,6 @@ script:
   - . $HOME/.nvm/nvm.sh
   - nvm ls
   - nvm install 5.0 2> /dev/null
+  - nvm use 5
   - nvm ls
   - npm --version
