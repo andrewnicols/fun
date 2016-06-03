@@ -8,3 +8,4 @@ script:
   - nvm ls
   - nvm install 5.0 2> /dev/null
   - nvm ls
+  - npm --version
