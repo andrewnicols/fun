@@ -6,5 +6,5 @@ php:
 script:
   - . $HOME/.nvm/nvm.sh
   - nvm ls
-  - nvm install 5.0 > /dev/null
+  - nvm install 5.0 2> /dev/null
   - nvm ls
