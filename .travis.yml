@@ -5,7 +5,10 @@ php:
 
 before_script:
   - nvm ls
+  - nvm install 5.0
+  - nvm ls
   - nvm use 5.0
+  - nvm ls
 
 script:
   - node --version
