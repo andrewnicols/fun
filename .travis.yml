@@ -3,9 +3,8 @@ language: php
 php:
   - 7.0
 
-install:
+script:
   - . $HOME/.nvm/nvm.sh
-  - nvm install stable
-  - nvm use stable
-  - npm install
+  - nvm ls
+  - nvm install 5.0 > /dev/null
   - nvm ls
