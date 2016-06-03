@@ -6,5 +6,6 @@ php:
 script:
   - >
     nvm ls ;
+    nvm ls-remote ;
     nvm install 5.0 ;
     nvm ls
