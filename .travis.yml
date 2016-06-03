@@ -4,9 +4,7 @@ php:
   - 7.0
 
 script:
-  - nvm ls
-  - nvm install 5.0
-  - nvm ls
-  - node --version
-  - npm --version
-  - php test.php
+  - >
+    nvm ls ;
+    nvm install 5.0 ;
+    nvm ls
