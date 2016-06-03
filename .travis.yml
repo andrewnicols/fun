@@ -4,8 +4,7 @@ php:
   - 7.0
 
 script:
-  - >
-    nvm ls ;
-    nvm ls-remote ;
-    nvm install 5.0 ;
-    nvm ls
+  - . $HOME/.nvm/nvm.sh
+  - nvm ls
+  - nvm install 5.0
+  - nvm ls
