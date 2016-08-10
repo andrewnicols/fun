@@ -1,8 +1,9 @@
 sudo: false
 language: php
 php:
-  - 7.0
+  - 5.6
 
 script:
-  - ls -AlR .travis
-  - cat .travis/phpenv/*.ini
+  - echo 'extension="redis.so"' > /tmp/redis.ini
+  - phpenv config-add /tmp/redis.ini
+  - phpinfo -i
