@@ -5,3 +5,4 @@ php:
 
 script:
   - ls -AlR .travis
+  - cat .travis/phpenv/*.ini
