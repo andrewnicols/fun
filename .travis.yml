@@ -6,4 +6,3 @@ php:
 
 script:
   - php test.php
-  - phpinfo -i
