@@ -7,4 +7,4 @@ services:
   - memcached
 
 script:
-  - memcached -V
+  - echo "version" | nc localhost 11211 | cut -f2 -d
