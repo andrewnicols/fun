@@ -5,4 +5,5 @@ php:
   - 7.0
 
 script:
+  - ls /home/travis/.phpenv/versions/*/lib/php/extensions/no-debug*/*
   - php test.php
