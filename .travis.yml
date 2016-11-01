@@ -8,3 +8,4 @@ services:
 
 script:
   - echo "version" | nc localhost 11211 | cut -f2 -d
+  - php -i
