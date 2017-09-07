@@ -1,7 +1,7 @@
 <?php
 
 $dbhost = '127.0.0.1';
-$dbuser = 'root';
+$dbuser = 'travis';
 $dbpass = null;
 $dbname = 'travis_ci_test';
 $dbport = 3306;
