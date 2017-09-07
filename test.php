@@ -3,7 +3,7 @@
 $dbhost = '127.0.0.1';
 $dbuser = 'root';
 $dbpass = null;
-$dbname = 'testdb';
+$dbname = 'travis_ci_test';
 $dbport = 3306;
 $dbsocket = '';
 
