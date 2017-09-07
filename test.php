@@ -1,4 +1,12 @@
 <?php
 
-var_dump(function_exists('random_bytes'));
-var_dump(function_exists('openssl_random_pseudo_bytes'));
+$dbhost = '127.0.0.1';
+$dbuser = 'travis';
+$dbpass = '';
+$dbname = 'testdb';
+$dbport = 3306;
+$dbsocket = '';
+
+$c = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport, $dbsocket);
+
+var_dump($c);
