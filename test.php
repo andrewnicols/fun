@@ -8,5 +8,8 @@ $dbport = 3306;
 $dbsocket = '';
 
 $c = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport, $dbsocket);
+var_dump($c);
 
+$dbuser = 'root';
+$c = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport, $dbsocket);
 var_dump($c);
