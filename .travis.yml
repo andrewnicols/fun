@@ -1,14 +1,17 @@
-dist: xenial
+dist: precise
 sudo: required
 language: php
 
-services:
-  - mysql
+jobs:
+  include:
+    - php: 7.4
+    - php: 7.3
+    - php: 7.2
+    - php: 7.1
+    - php: 7.0
+    - php: 5.6
+    - php: 5.5
+    - php: 5.4
+    - php: 5.3
 
-before_install:
-  - sudo mkdir /mnt/ramdisk
-  - sudo mount -t tmpfs -o size=1024m tmpfs /mnt/ramdisk
-  - sudo service mysql stop
-  - sudo mv /var/lib/mysql /mnt/ramdisk
-  - sudo ln -s /mnt/ramdisk/mysql /var/lib/mysql
-  - sudo service mysql start
+script: php -v
