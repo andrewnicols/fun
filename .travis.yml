@@ -69,4 +69,4 @@ jobs:
     - php: 5.2
       dist: precise
 
-script: php -v
+script: php test.php

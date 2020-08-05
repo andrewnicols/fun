@@ -12,6 +12,18 @@ function fix_html_content($input) {
     var_dump("============================================================================");
     var_dump($input);
     var_dump($domdoc->saveHTML());
+
+    $comparewith = <<<EOF
+<p>Hello</p>
+
+EOF;
+
+    if ($domdoc->saveHTML() !== $comparewith) {
+        echo "FAIL /o\\n";
+        exit(1);
+    } else {
+        echo "Pass :)\n";
+    }
 }
 
 fix_html_content('</div><p>Hello</p>');
