@@ -1,15 +1,17 @@
 <?php
 
-$dbhost = '127.0.0.1';
-$dbuser = 'travis';
-$dbpass = null;
-$dbname = 'travis_ci_test';
-$dbport = 3306;
-$dbsocket = '';
+function fix_html_content($input) {
+    $previouserrors = libxml_use_internal_errors(true);
 
-$c = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport, $dbsocket);
-var_dump($c->connect_error);
+    $domdoc = new DOMDocument('1.0', 'UTF-8');
+    $domdoc->loadHTML($input, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-$dbpass = '';
-$c = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport, $dbsocket);
-var_dump($c->connect_error);
+    libxml_clear_errors();
+    libxml_use_internal_errors($previouserrors);
+
+    var_dump("============================================================================");
+    var_dump($input);
+    var_dump($domdoc->saveHTML());
+}
+
+fix_html_content('</div><p>Hello</p>');
