@@ -18,10 +18,13 @@ $za = new ZipArchive();
 $za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 var_dump($za->getStatusString());
 
+var_dump("Adding the file from {$fpc}");
 $result = $za->addFile($fpc, basename($fpc));
+var_dump("The result was {$result}");
 var_dump($result);
+var_dump("Status:");
 var_dump($za->getStatusString());
 
+var_dump("Closing:");
 $za->close();
-var_dump($za->getStatusString());
 var_dump(file_get_contents($zapath));
