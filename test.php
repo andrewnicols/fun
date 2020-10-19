@@ -15,7 +15,8 @@ var_dump(file_get_contents($fpc));
 
 $zapath = "{$newdir}export.zip";
 $za = new ZipArchive();
-$za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+$result = $za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+var_dump($result);
 var_dump($za->getStatusString());
 
 var_dump("Adding the file from {$fpc}");
