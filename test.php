@@ -15,7 +15,7 @@ var_dump(file_get_contents($fpc));
 
 $zapath = "{$newdir}archive.zip";
 $za = new ZipArchive();
-$za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERRIDE);
+$za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 var_dump($za->getStatusString());
 
 $result = $za->addFile($fpc, basename($fpc));
