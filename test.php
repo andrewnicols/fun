@@ -13,8 +13,11 @@ file_put_contents($fpc, "Some content");
 var_dump(file_get_contents($fpc));
 
 
+var_dump("----------------------------------------------------------------------------");
 $zapath = "{$newdir}export.zip";
+var_dump($zapath);
 $za = new ZipArchive();
+var_dump("Opening");
 $result = $za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 var_dump($result);
 var_dump($za->getStatusString());
