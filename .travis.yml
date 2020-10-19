@@ -34,4 +34,4 @@ install:
   - export PATH=/c/tools/php:$PATH
 
 script:
-  - test.php
+  - php test.php
