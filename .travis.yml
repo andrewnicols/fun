@@ -1,72 +1,37 @@
-dist: trusty
-sudo: required
-language: php
+language: shell
 
-jobs:
-  include:
-    - php: 7.4
-      dist: bionic
-    - php: 7.4
-      dist: xenial
-    - php: 7.4
-      dist: trusty
+os: windows
 
+git:
+  autocrlf: input # Travis windows goes to "true" meaning all files become CRLF ended. We don't want that.
 
-    - php: 7.3
-      dist: bionic
-    - php: 7.3
-      dist: xenial
-    - php: 7.3
-      dist: trusty
-    - php: 7.3
-      dist: precise
+env:
+  - PHP_VERSION=7.2.26
+  - PHP_VERSION=7.4.5
 
-    - php: 7.2
-      dist: bionic
-    - php: 7.2
-      dist: xenial
-    - php: 7.2
-      dist: trusty
-    - php: 7.2
-      dist: precise
+install:
+  # just in case you want to know it :-)
+  - export PPWWDD=youfoundme010
+  - choco install php --version=${PHP_VERSION} --package-parameters="/InstallDir:c:\tools\php"
+  # download and configure CA certs and configure php to use them (no check cert, coz windows misses haxx.se one)
+  - wget https://curl.haxx.se/ca/cacert.pem -O /c/tools/php/cacert.pem --no-check-certificate
+  - sed -i -e "s%;curl.cainfo =%curl.cainfo=\"C://tools/php/cacert.pem\"%" /c/tools/php/php.ini
+    # define where the extensions dir is (not all php versions have it defined)
+  - sed -i -e "s%;extension_dir = \"ext\"%extension_dir = \"ext\"%" /c/tools/php/php.ini
+  # enable the extensions we need
+  - sed -i -re "s%;extension=(php_)?mbstring%extension=\1mbstring%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?curl%extension=\1curl%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?fileinfo%extension=\1fileinfo%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?gd%extension=\1gd%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?intl%extension=\1intl%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?mysqli%extension=\1mysqli%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?openssl%extension=\1openssl%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?pgsql%extension=\1pgsql%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?soap%extension=\1soap%" /c/tools/php/php.ini
+  - sed -i -re "s%;extension=(php_)?xmlrpc%extension=\1xmlrpc%" /c/tools/php/php.ini
+  # need a openssl.cnf, let's provide it
+  - export OPENSSL_CONF=/c/tools/php/extras/ssl/openssl.cnf
+  - export PATH=/c/tools/php:$PATH
 
-    - php: 7.1
-      dist: bionic
-    - php: 7.1
-      dist: xenial
-    - php: 7.1
-      dist: trusty
-    - php: 7.1
-      dist: precise
-
-    - php: 7.0
-      dist: xenial
-    - php: 7.0
-      dist: trusty
-    - php: 7.0
-      dist: precise
-
-    - php: 5.6
-      dist: xenial
-    - php: 5.6
-      dist: trusty
-    - php: 5.6
-      dist: precise
-
-    - php: 5.5
-      dist: trusty
-    - php: 5.5
-      dist: precise
-
-    - php: 5.4
-      dist: trusty
-    - php: 5.4
-      dist: precise
-
-    - php: 5.3
-      dist: precise
-
-    - php: 5.2
-      dist: precise
-
-script: php test.php
+script:
+  - test.php
