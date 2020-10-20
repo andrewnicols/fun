@@ -5,12 +5,11 @@ $umaskperm = (($dirperm & 0777) ^ 0777);
 
 var_dump(sys_get_temp_dir());
 
-$newdir = sys_get_temp_dir() . '\requestdir/24zxX8s03Hv2nJtZDps0Gy4qFdCdNRW8www.example.com\4a630054-1e6b-4d56-ae74-c75349c5f9c7\6231eaae-5d75-45d0-80f1-ebd39ddf164f/';
+$newdir = sys_get_temp_dir() . '/requestdir/kvewOEfNJn9Ik6C9NxFZvWH20PewkhElwww.example.com\d401a993-c34a-4956-914f-6c7d35ede7c7\c8c7269d-0252-4623-880e-2e20f75880df/';
 mkdir($newdir, $dirperm, true);
 
-$fpc = "{$newdir}fpc.zip";
+$fpc = "{$newdir}file_put_contents_example.txt";
 file_put_contents($fpc, "Some content");
-var_dump(file_get_contents($fpc));
 
 
 var_dump("----------------------------------------------------------------------------");
