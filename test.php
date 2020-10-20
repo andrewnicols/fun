@@ -8,7 +8,9 @@ var_dump(sys_get_temp_dir());
 $newdir = sys_get_temp_dir() . '/requestdir/kvewOEfNJn9Ik6C9NxFZvWH20PewkhElwww.example.com\d401a993-c34a-4956-914f-6c7d35ede7c7\c8c7269d-0252-4623-880e-2e20f75880df/';
 mkdir($newdir, $dirperm, true);
 
-$fpc = "{$newdir}file_put_contents_example.txt";
+error_log("Testing with {$newdir}");
+
+$fpc = "{$newdir}\System _.1\Category Miscellaneous _.3\Course Test course 1 _.16\User preferences\core_privacy.json";
 file_put_contents($fpc, "Some content");
 
 
