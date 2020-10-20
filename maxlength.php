@@ -1,4 +1,5 @@
 <?php
+ini_set('zend.assertions', 1);
 
 $finaldir = str_pad(sys_get_temp_dir() . '/', 261, 'x');
 @mkdir($finaldir, 0777, true);
