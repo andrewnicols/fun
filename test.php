@@ -10,7 +10,9 @@ mkdir($newdir, $dirperm, true);
 
 error_log("Testing with {$newdir}");
 
-$fpc = "{$newdir}\System _.1\Category Miscellaneous _.3\Course Test course 1 _.16\User preferences\core_privacy.json";
+$finaldir = "{$newdir}\System _.1\Category Miscellaneous _.3\Course Test course 1 _.16\User preferences";
+mkdir($finaldir, $dirperm, true);
+$fpc = "{$finaldir}\core_privacy.json";
 file_put_contents($fpc, "Some content");
 
 
