@@ -1,7 +1,7 @@
 <?php
 
 $basedir = sys_get_temp_dir() . '/tests/some/different/subdir/structures/is/it/still/stuck/at/260/chars/';
-$basedir = __DIR__ . '/tests/some/different/subdir/structures/is/it/still/stuck/at/25/chars/';
+$basedir = __DIR__ . '/tests/some/different/subdir/structures/is/it/still/stuck/at/260/chars/';
 $baselength = strlen($basedir);
 
 for ($i = $baselength + 1; $i < $baselength + 400; $i++) {
@@ -24,7 +24,7 @@ function test_zip_with_file_length(string $basedir, int $length): bool {
     $dirperm = 02777;
     $umaskperm = (($dirperm & 0777) ^ 0777);
 
-    $filename = "input.json";
+    $filename = "differentinput.json";
 
     $finaldir = str_pad($basedir, $length, 'x');
     $contentfile = "{$finaldir}/{$filename}";
