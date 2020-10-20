@@ -17,22 +17,24 @@ function test_zip_with_file_length(string $basedir, int $length): bool {
     $filename = "input.json";
 
     $finaldir = str_pad($basedir, $length, 'x');
+    $contentfile = "{$finaldir}/{$filename}";
 
     error_log(sprintf(
         "\n" .
         "============================================================================\n" .
         "== Testing with length:\t%d\n" .
         "== %s",
-        $length,
-        $finaldir
+        strlen($length),
+        $contentfile
     ));
 
     mkdir($finaldir, $dirperm, true);
 
-    $contentfile = "{$finaldir}/{$filename}";
     $content = file_put_contents($contentfile, "This is some example content");
 
-    if (!file_exists($contentfile)) {
+    if (file_exists($contentfile)) {
+        error_log("File created: " . file_get_contents($contentfile));
+    } else {
         error_log("Could not create a file in {$contentfile}");
         return false;
     }
@@ -64,10 +66,11 @@ function test_zip_with_file_length(string $basedir, int $length): bool {
     error_log(sprintf(
         "    Closing"
     ));
-    $za->close();
+    $result = $za->close();
 
     error_log(sprintf(
-        "    Closed (%s):\n\t%s\n\n",
+        "    Closed (%s/%s):\n\t%s\n\n",
+        var_export($result, true),
         var_export(file_exists($zippath), true),
         file_get_contents($zippath)
     ));
