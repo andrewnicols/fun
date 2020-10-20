@@ -33,4 +33,5 @@ install:
   - export PATH=/c/tools/php:$PATH
 
 script:
+  - php maxlength.php
   - php test.php
