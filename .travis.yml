@@ -33,4 +33,4 @@ install:
   - export PATH=/c/tools/php:$PATH
 
 script:
-  - php maxlength.php
+  - php -d zend.assertions=1 maxlength.php
