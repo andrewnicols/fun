@@ -6,7 +6,16 @@ $baselength = strlen($basedir);
 for ($i = $baselength + 1; $i < $baselength + 400; $i++) {
     rm($basedir);
     if (!test_zip_with_file_length($basedir, $i)) {
-        break;
+        echo "============================================================================\n";
+        echo "============================================================================\n";
+        echo "============================================================================\n";
+        echo "\n";
+        echo "Failed to run with a total file lenfth of {$i}\n";
+        echo "\n";
+        echo "============================================================================\n";
+        echo "============================================================================\n";
+        echo "============================================================================\n";
+        exit(1);
     }
 }
 
@@ -24,7 +33,7 @@ function test_zip_with_file_length(string $basedir, int $length): bool {
         "============================================================================\n" .
         "== Testing with length:\t%d\n" .
         "== %s",
-        strlen($length),
+        strlen($contentfile),
         $contentfile
     ));
 
@@ -75,7 +84,7 @@ function test_zip_with_file_length(string $basedir, int $length): bool {
         file_get_contents($zippath)
     ));
 
-    return true;
+    return $result && file_exists($zippath);
 }
 
 function rm(string $path) {
