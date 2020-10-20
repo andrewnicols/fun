@@ -6,7 +6,6 @@ git:
   autocrlf: input # Travis windows goes to "true" meaning all files become CRLF ended. We don't want that.
 
 env:
-  - PHP_VERSION=7.2.26
   - PHP_VERSION=7.4.5
 
 install:
