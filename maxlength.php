@@ -3,7 +3,7 @@
 $finaldir = str_pad(sys_get_temp_dir() . '/', 261, 'x');
 @mkdir($finaldir, 0777, true);
 $contentfile = "{$finaldir}/example_input.txt";
-unlink($contentfile);
+@unlink($contentfile);
 
 $content = "Some example content";
 file_put_contents($contentfile, $content);

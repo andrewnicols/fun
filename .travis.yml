@@ -34,4 +34,3 @@ install:
 
 script:
   - php maxlength.php
-  - php test.php
