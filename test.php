@@ -1,37 +1,90 @@
 <?php
 
-$dirperm = 02777;
-$umaskperm = (($dirperm & 0777) ^ 0777);
+$basedir = sys_get_temp_dir() . '/tests/';
+$baselength = strlen($basedir);
 
-var_dump(sys_get_temp_dir());
+for ($i = $baselength + 1; $i < $baselength + 400; $i++) {
+    rm($basedir);
+    if (!test_zip_with_file_length($basedir, $i)) {
+        break;
+    }
+}
 
-$newdir = sys_get_temp_dir() . '/requestdir/kvewOEfNJn9Ik6C9NxFZvWH20PewkhElwww.example.com\d401a993-c34a-4956-914f-6c7d35ede7c7\c8c7269d-0252-4623-880e-2e20f75880df/';
-mkdir($newdir, $dirperm, true);
+function test_zip_with_file_length(string $basedir, int $length): bool {
+    $dirperm = 02777;
+    $umaskperm = (($dirperm & 0777) ^ 0777);
 
-error_log("Testing with {$newdir}");
+    $filename = "input.json";
 
-$finaldir = "{$newdir}\System _.1\Category Miscellaneous _.3\Course Test course 1 _.16\User preferences";
-mkdir($finaldir, $dirperm, true);
-$fpc = "{$finaldir}\core_privacy.json";
-file_put_contents($fpc, "Some content");
+    $finaldir = str_pad($basedir, $length, 'x');
+
+    error_log(sprintf(
+        "\n" .
+        "============================================================================\n" .
+        "== Testing with length:\t%d\n" .
+        "== %s",
+        $length,
+        $finaldir
+    ));
+
+    mkdir($finaldir, $dirperm, true);
+
+    $contentfile = "{$finaldir}/{$filename}";
+    $content = file_put_contents($contentfile, "This is some example content");
+
+    if (!file_exists($contentfile)) {
+        error_log("Could not create a file in {$contentfile}");
+        return false;
+    }
+
+    $zippath = sys_get_temp_dir() . '/export.zip';
+    @unlink($zippath);
+    $za = new ZipArchive();
+    $result = $za->open($zippath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    error_log(sprintf(
+        "    Opened the zip file (%s): %s",
+        var_export($result, true),
+        $za->getStatusString()
+    ));
+
+    error_log(sprintf(
+        "        Adding file from %s",
+        $contentfile
+    ));
 
 
-var_dump("----------------------------------------------------------------------------");
-$zapath = "{$newdir}export.zip";
-var_dump($zapath);
-$za = new ZipArchive();
-var_dump("Opening");
-$result = $za->open($zapath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-var_dump($result);
-var_dump($za->getStatusString());
+    $result = $za->addFile($contentfile, basename($contentfile));
+    error_log(sprintf(
+        "        Added file to zip file (%s): %s (%s)",
+        var_export($result, true),
+        $za->getStatusString(),
+        $contentfile
+    ));
 
-var_dump("Adding the file from {$fpc}");
-$result = $za->addFile($fpc, basename($fpc));
-var_dump("The result was {$result}");
-var_dump($result);
-var_dump("Status:");
-var_dump($za->getStatusString());
+    error_log(sprintf(
+        "    Closing"
+    ));
+    $za->close();
 
-var_dump("Closing:");
-$za->close();
-var_dump(file_get_contents($zapath));
+    error_log(sprintf(
+        "    Closed (%s):\n\t%s\n\n",
+        var_export(file_exists($zippath), true),
+        file_get_contents($zippath)
+    ));
+
+    return true;
+}
+
+function rm(string $path) {
+    $files = array_diff(scandir($path), ['.', '..']);
+    foreach ($files as $file) {
+        $filepath ="{$path}/{$file}";
+        if (is_dir($filepath)) {
+            rm($filepath);
+        } else {
+            unlink($filepath);
+        }
+    }
+
+    rmdir($path);
+}
