@@ -1,6 +1,7 @@
 <?php
 
 $basedir = sys_get_temp_dir() . '/tests/some/different/subdir/structures/is/it/still/stuck/at/260/chars/';
+$basedir = __DIRNAME__ . '/tests/some/different/subdir/structures/is/it/still/stuck/at/260/chars/';
 $baselength = strlen($basedir);
 
 for ($i = $baselength + 1; $i < $baselength + 400; $i++) {
